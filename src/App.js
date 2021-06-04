@@ -9,7 +9,7 @@ function App() {
   function getLocation(location) {
     console.log(location)
     
-    let url = `http://api.weatherapi.com/v1/forecast.json?key=561f47b3f56a48c1812102405211504&q=${location}&days=1&aqi=yes`
+    let url = `https://api.weatherapi.com/v1/forecast.json?key=561f47b3f56a48c1812102405211504&q=${location}&days=1&aqi=yes`
     // console.log(url)
     fetch(url)
       .then(response => {
