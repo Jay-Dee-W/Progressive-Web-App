@@ -1,0 +1,16 @@
+.weather{
+    margin: auto;
+    border-radius: .5em;
+    background: white;
+    text-align: center;
+    width: 60vh;
+    height: 20vh;
+    justify-content: center;
+}
+.temp {
+    display: inline-block;
+}
+.icon {
+    height: 40px;
+    width: 40px;
+}

@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Weather from './Weather'
 import './App.css';
 
 function App() {
+  const [location, setLocation] = useState('')
+  const [weatherData, setWeatherData] = useState()
+
+  function getLocation(location) {
+    console.log(location)
+    
+    let url = `http://api.weatherapi.com/v1/forecast.json?key=561f47b3f56a48c1812102405211504&q=${location}&days=1&aqi=yes`
+    // console.log(url)
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          window.alert('Invaild Location');
+          return;
+        }
+        return response.json()
+      })
+      .then(data =>setWeatherData(data) )
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <div className="header">
+        <h1> Weather and Pollution Info</h1>
+        <p>Enter a Location: </p>
+        <input type='text' value={location} onChange={e => { setLocation(e.target.value); e.target.value = '' }} />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <input className='button' value='Get Info' type='button' onClick={() => getLocation(location)} />
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        {weatherData && <Weather data={weatherData} />}
+      </div>
     </div>
   );
 }
